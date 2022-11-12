@@ -1,0 +1,55 @@
+﻿@model AccesoVM
+@{
+    ViewData["Title"] = "Acceso de ususario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title text-center">Registro de usuario</h3>
+        <form asp-controller="Cuentas" asp-action="Acceso" method="post">
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <div class="row mt-4">
+                <div class="col-sm-6">
+                    <!--primera columna-->
+                    <div class=" mb-3">
+                        <label asp-for="Email" class="col-md-2"></label>
+                        <input asp-for="Email" class="form-control" placeholder="Ingresa tu email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class=" mb-3">
+                        <label asp-for="Password" class="col-md-2"></label>
+                        <input asp-for="Password" class="form-control" placeholder="Ingresa tu contraseña" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class=" mb-3">
+                        <label asp-for="RememberMe" class="col-md-3">
+                            <input asp-for="RememberMe" />
+                            @Html.DisplayNameFor(m=>m.RememberMe)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 offset-2">
+                    <!--segunda columna-->
+                    <h3>Pendiente acceso aplicacion externas</h3>
+                </div>
+            </div>
+
+            <!--boton-->
+            <div class="row">
+                <div class="col-sm-6 ">
+                    <button type="submit" class="btn btn-success w-100 btn-lg">Acceder<i class="bi bi-arrow-right-circle-fill"></i></button>
+                    @*si el usuario no tiene cuenta lo direccionamos al registro*@
+                    <p><a asp-action="Registro">Registro como un nuevo usuario</a></p>
+                    <p><a asp-action="OlvidoPassword">Olvido su contraseña</a></p>@*aun no se creo el metodo*@
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--validacion del lado del cliente con la vista parcial-->
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
